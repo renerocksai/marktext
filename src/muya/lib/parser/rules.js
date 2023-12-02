@@ -43,6 +43,6 @@ export const inlineExtensionRules = {
   superscript: /^(\^)((?:[^\^\s]|(?<=\\)\1|(?<=\\) )+?)(?<!\\)\1(?!\1)/,
   subscript: /^(~)((?:[^~\s]|(?<=\\)\1|(?<=\\) )+?)(?<!\\)\1(?!\1)/,
   footnote_identifier: /^(\[\^)([^\^\[\]\s]+?)(?<!\\)\]/,
-  highlight:    /^(==)(?=\S)([\s\S]*?[^\s\\])(\\=)\1(?!(=))/, // can nest
+  highlight: /^(==)(?=\S)([\s\S]*?[^s\\])(==)/
 }
 /* eslint-enable no-useless-escape */
