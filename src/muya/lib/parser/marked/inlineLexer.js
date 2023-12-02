@@ -242,14 +242,11 @@ InlineLexer.prototype.output = function (src) {
     // highlight
     cap = this.rules.highlight.exec(src)
     if (cap) {
-      const marker = cap[0].match(/^(?:_{1,2}|\*{1,2})/)[0]
-      const isValid = validateEmphasize(src, cap[0].length, marker, lastChar, this.highPriorityEmpRules)
-      if (isValid) {
-        src = src.substring(cap[0].length)
-        lastChar = cap[0].charAt(cap[0].length - 1)
-        out += this.renderer.mark(this.output(cap[4] || cap[3] || cap[2] || cap[1]))
-        continue
-      }
+      const marker = cap[0].match(/^(?:={1,2})/)[0]
+      src = src.substring(cap[0].length)
+      lastChar = cap[0].charAt(cap[0].length - 1)
+      out += this.renderer.mark(this.output(cap[4] || cap[3] || cap[2] || cap[1]))
+      continue
     }
 
     // em
