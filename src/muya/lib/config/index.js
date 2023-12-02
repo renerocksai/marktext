@@ -177,7 +177,7 @@ export const DEFAULT_TURNDOWN_CONFIG = Object.freeze({
   fence: '```', // ``` or ~~~
   emDelimiter: '*', // _ or *
   strongDelimiter: '**', // ** or __
-  highlightDelimiter: '==' // rene
+  highlightDelimiter: '==', // rene
   linkStyle: 'inlined',
   linkReferenceStyle: 'full',
   blankReplacement (content, node, options) {
