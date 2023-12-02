@@ -7,7 +7,27 @@ on:
       - 'release-v*'
 
 jobs:
+  draft_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref_name }} ${{ github.sha }}
+          body: |
+            Automated Release by GitHub Action CI
+          draft: false
+          prerelease: true
+
   unix:
+    needs: draft_release
     runs-on: ${{ matrix.os }}
     continue-on-error: false
     timeout-minutes: 45
@@ -108,6 +128,39 @@ jobs:
           shasum -a 256 build/marktext-x64.dmg
         shell: bash
 
+      - name: Ship AppImage (Linux x64)
+        if: runner.os == 'Linux'
+        id: upload-release-asset-linux-x64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.draft_release.outputs.upload_url }}
+          asset_path: build/marktext-x86_64.AppImage
+          asset_name: marktext-x86_64.AppImage
+          asset_content_type: application/vnd.appimage
+
+      - name: Ship arm64-mac.dmg (macOS arm64)
+        if: runner.os == 'macOS'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.draft_release.outputs.upload_url }}
+          asset_path: build/marktext-arm64.dmg
+          asset_name: marktext-arm64.dmg
+          asset_content_type: application/x-apple-diskimage
+
+      - name: Ship x64-mac.dmg (macOS x64)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.draft_release.outputs.upload_url }}
+          asset_path: build/marktext-x64.dmg
+          asset_name: marktext-x64.dmg
+          asset_content_type: application/x-apple-diskimage
+
   windows:
     runs-on: windows-latest
     continue-on-error: false
@@ -177,3 +230,18 @@ jobs:
           get-filehash -Algorithm SHA256 "build\marktext-setup.exe"
           get-filehash -Algorithm SHA256 "build\marktext-*-win.zip"
         shell: pwsh
+
+      - name: Zip installer
+        shell: powershell
+        run: Compress-7Zip "build/marktext-setup.exe" -ArchiveFileName "marktext-setup.zip" -Format Zip
+
+      - name: Ship it (Windows x64)
+        id: upload-release-asset-windows-x64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.draft_release.outputs.upload_url }}
+          asset_path: marktext-setup.zip
+          asset_name: marktext-setup.zip
+          asset_content_type: application/zip
