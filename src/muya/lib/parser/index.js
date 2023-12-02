@@ -144,8 +144,8 @@ const tokenizerFac = (src, beginRules, inlineRules, pos = 0, top, labels, option
       pos = pos + backTo[0].length
       continue
     }
-    // strong | em
-    const emRules = ['strong', 'em']
+    // strong | em | highlight   // rene: highlight
+    const emRules = ['strong', 'em', 'highlight']
     let inChunk
     for (const rule of emRules) {
       const to = inlineRules[rule].exec(src)

@@ -3,11 +3,12 @@ import { COMMANDS } from '../../commands'
 const MENU_ID_FORMAT_MAP = Object.freeze({
   strongMenuItem: 'strong',
   emphasisMenuItem: 'em',
+  highlightMenuItem: 'mark',
   inlineCodeMenuItem: 'inline_code',
   strikeMenuItem: 'del',
   hyperlinkMenuItem: 'link',
   imageMenuItem: 'image',
-  inlineMathMenuItem: 'inline_math'
+  inlineMathMenuItem: 'inline_math',
 })
 
 const format = (win, type) => {

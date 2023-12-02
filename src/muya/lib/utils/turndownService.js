@@ -16,6 +16,14 @@ export const usePluginAddRules = (turndownService, keeps) => {
     }
   })
 
+  // rene
+  turndownService.addRule('highlight', {
+    filter: ['mark'],
+    replacement (content) {
+      return '==' + content + '=='
+    }
+  })
+
   turndownService.addRule('paragraph', {
     filter: 'p',
 
