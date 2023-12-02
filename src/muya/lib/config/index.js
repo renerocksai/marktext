@@ -177,6 +177,7 @@ export const DEFAULT_TURNDOWN_CONFIG = Object.freeze({
   fence: '```', // ``` or ~~~
   emDelimiter: '*', // _ or *
   strongDelimiter: '**', // ** or __
+  highlightDelimiter: '==' // rene
   linkStyle: 'inlined',
   linkReferenceStyle: 'full',
   blankReplacement (content, node, options) {
@@ -210,13 +211,14 @@ export const FORMAT_MARKER_MAP = Object.freeze({
     open: '<sup>',
     close: '</sup>'
   },
+  // rene: should be unused -> not treated as html tag anymore
   mark: {
     open: '==',
     close: '=='
   }
 })
 
-export const FORMAT_TYPES = Object.freeze(['strong', 'em', 'del', 'inline_code', 'link', 'image', 'inline_math'])
+export const FORMAT_TYPES = Object.freeze(['strong', 'em', 'del', 'mark', 'inline_code', 'link', 'image', 'inline_math'])
 
 export const LINE_BREAK = '\n'
 

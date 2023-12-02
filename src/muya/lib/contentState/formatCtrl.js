@@ -11,8 +11,9 @@ const getOffset = (offset, { range: { start, end }, type, tag, anchor, alt }) =>
     case 'del':
     case 'em':
     case 'inline_code':
+    case 'mark':  // rene
     case 'inline_math': {
-      const MARKER_LEN = (type === 'strong' || type === 'del') ? 2 : 1
+      const MARKER_LEN = (type === 'strong' || type === 'del' || type === 'mark') ? 2 : 1
       if (dis < 0) return 0
       if (dis >= 0 && dis < MARKER_LEN) return -dis
       if (dis >= MARKER_LEN && dis <= len - MARKER_LEN) return -MARKER_LEN
@@ -61,6 +62,7 @@ const clearFormat = (token, { start, end }) => {
     case 'strong':
     case 'del':
     case 'em':
+    case 'mark':
     case 'link':
     case 'html_tag': { // underline, sub, sup
       const { parent } = token
@@ -139,7 +141,7 @@ const addFormat = (type, block, { start, end }) => {
 const checkTokenIsInlineFormat = token => {
   const { type, tag } = token
   if (FORMAT_TYPES.includes(type)) return true
-  if (type === 'html_tag' && /^(?:u|sub|sup|mark)$/i.test(tag)) return true
+  if (type === 'html_tag' && /^(?:u|sub|sup|mark)$/i.test(tag)) return true // rene: maybe remove mark?
   return false
 }
 
