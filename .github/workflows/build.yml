@@ -1,14 +1,15 @@
 name: Build
 
 on:
-  push:
-    branches: [ main, master, develop ]
-    paths-ignore:
-      - 'docs/**'
-  pull_request:
-    branches: [ main, master, develop ]
-    paths-ignore:
-      - 'docs/**'
+  workflow-dispatch:
+  # push:
+  #   branches: [ main, master, develop ]
+  #   paths-ignore:
+  #     - 'docs/**'
+  # pull_request:
+  #   branches: [ main, master, develop ]
+  #   paths-ignore:
+  #     - 'docs/**'
 
 jobs:
   unix:
