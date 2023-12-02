@@ -235,19 +235,15 @@ jobs:
         run: |
           get-filehash -Algorithm SHA256 "build\marktext-setup.exe"
           get-filehash -Algorithm SHA256 "build\marktext-*-win.zip"
+          dir build\
         shell: pwsh
 
-      - name: Zip installer
-        shell: powershell
-        run: Compress-7Zip "build/marktext-setup.exe" -ArchiveFileName "marktext-setup.zip" -Format Zip
-
       - name: Ship it (Windows x64)
-        id: upload-release-asset-windows-x64
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.draft_release.outputs.upload_url }}
-          asset_path: marktext-setup.zip
-          asset_name: marktext-setup.zip
-          asset_content_type: application/zip
+          asset_path: build/marktext-setup.exe
+          asset_name: marktext-setup.exe
+          asset_content_type: application/octet-stream
