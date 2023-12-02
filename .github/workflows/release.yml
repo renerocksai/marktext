@@ -162,6 +162,7 @@ jobs:
           asset_content_type: application/x-apple-diskimage
 
   windows:
+    needs: draft_release
     runs-on: windows-latest
     continue-on-error: false
     timeout-minutes: 45
