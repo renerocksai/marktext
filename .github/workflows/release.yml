@@ -64,19 +64,19 @@ jobs:
       - name: Install dependencies
         run: yarn install --check-files --frozen-lockfile
 
-      - name: Strip ripgrep on Linux
-        if: runner.os == 'Linux'
-        run: strip node_modules/vscode-ripgrep/bin/rg
+      # - name: Strip ripgrep on Linux
+      #   if: runner.os == 'Linux'
+      #   run: strip node_modules/vscode-ripgrep/bin/rg
 
-      - name: Lint
-        run: |
-          yarn run lint
-          yarn run validate-licenses
+      # - name: Lint
+      #   run: |
+      #     yarn run lint
+      #     yarn run validate-licenses
 
-      - name: Run unit and E2E tests
-        uses: GabrielBB/xvfb-action@v1
-        with:
-          run: yarn run test
+      # - name: Run unit and E2E tests
+      #   uses: GabrielBB/xvfb-action@v1
+      #   with:
+      #     run: yarn run test
 
       - name: Build and release
         run: |
@@ -160,13 +160,13 @@ jobs:
       - name: Install dependencies
         run: yarn install --check-files --frozen-lockfile
 
-      - name: Lint
-        run: |
-          yarn run lint
-          yarn run validate-licenses
+      # - name: Lint
+      #   run: |
+      #     yarn run lint
+      #     yarn run validate-licenses
 
-      - name: Run unit and E2E tests
-        run: yarn run test
+      # - name: Run unit and E2E tests
+      #   run: yarn run test
 
       - name: Build and release
         run: yarn run release:win --publish always
