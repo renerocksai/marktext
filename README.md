@@ -1,7 +1,7 @@
 <p align="center"><img src="static/logo-small.png" alt="MarkText" width="100" height="100"></p>
 
 <h1 align="center">MarkText</h1>
-<h2 align="center">FORK that just replaces the ugly &lt;mark&gt; tag by ==this== notation </h2>
+<h2 align="center">FORK that just replaces the ugly &lt;mark&gt; tag by ==<mark>this</mark>== notation </h2>
 
 <div align="center">
   <a href="https://twitter.com/intent/tweet?via=marktextme&url=https://github.com/marktext/marktext/&text=What%20do%20you%20want%20to%20say%20to%20app?&hashtags=happyMarkText">
