@@ -161,6 +161,10 @@ Renderer.prototype.strong = function (text) {
   return '<strong>' + text + '</strong>'
 }
 
+Renderer.prototype.mark = function(text) {
+  return '<mark>' + text + '</mark>'
+}
+
 Renderer.prototype.em = function (text) {
   return '<em>' + text + '</em>'
 }
