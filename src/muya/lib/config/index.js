@@ -211,8 +211,8 @@ export const FORMAT_MARKER_MAP = Object.freeze({
     close: '</sup>'
   },
   mark: {
-    open: '<mark>',
-    close: '</mark>'
+    open: '==',
+    close: '=='
   }
 })
 
